@@ -1,0 +1,21 @@
+
+
+.course-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+
+.course-card {
+    margin: 10px; 
+    width: 220px; 
+}
+
+mat-card {
+    padding: 20px; 
+    text-align: center; 
+}
+
+
+
+  

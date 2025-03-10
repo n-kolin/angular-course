@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.left {
+    width: 50%; 
+    text-align: right;
+}
+
+.right {
+    width: 50%; 
+    text-align: center;
+}
+button{
+    margin: 10px;
+}

@@ -1,0 +1,67 @@
+.home-container {
+    margin: 70px;
+}
+
+.welcome-text {
+    float: right;
+}
+
+.content {
+    margin: 20px;
+}
+
+.recommendations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.recommendation-card {
+    width: calc(33% - 20px); /* Adjusting for gap */
+}
+
+.testimonial-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.testimonial-form label {
+    margin-bottom: 5px;
+}
+
+.testimonial-form input,
+.testimonial-form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.testimonial-form button {
+    padding: 10px;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button{
+    width: 100px;
+}
+
+mat-card{
+    padding: 15px;
+}
+.testimonials{
+    margin: 15px;
+    margin-left: 25px;
+    width: 70%;
+}
+.submit{
+    margin-bottom: 100px;
+}
+input ,textarea{
+    width: 40%;
+
+}

@@ -1,0 +1,20 @@
+
+<mat-toolbar class="container" color="primary">
+    <div class="right">
+      <span>Wolcome to Courses Online!</span>
+    </div>
+    <div class="left">
+      <button mat-button [routerLink]="['']">home</button>
+      @if(id){
+          <button mat-button (click)="navigate()">my dashboard</button>
+      }
+      <button mat-flat-button color="primary" [routerLink]="['/connect/login']">sign in</button>
+      <button mat-raised-button (click)="f()" [routerLink]="['/connect/register']">sign up</button>
+  
+    </div>
+  </mat-toolbar> 
+
+
+  <div >
+    <router-outlet></router-outlet>
+</div>

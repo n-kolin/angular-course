@@ -1,0 +1,64 @@
+<div>
+    <!-- <button mat-flat-button color="primary" (click)="openDialog()">Add or Update Lesson</button> -->
+</div>
+
+<ng-template #dialogTemplate>
+    <mat-dialog-content>
+     
+        <button mat-icon-button (click)="closeDialog()" style="float: right;">
+            <mat-icon>close</mat-icon>
+          </button>
+        <form [formGroup]="isLesson?lessonForm:courseForm" (ngSubmit)="onSubmit()">
+            <h2 mat-dialog-title>
+                <mat-icon matPrefix>book</mat-icon>
+                {{ isEdit ? 'Update ' : 'Add ' }} {{isLesson?'Lesson':'Course'}}
+            </h2>
+
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" required>
+                <mat-icon matPrefix>title</mat-icon>
+                @if (lessonForm.get('title')?.invalid && lessonForm.get('title')?.touched) {
+                    <mat-error>
+                        Title is required
+                    </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{isLesson?'Content':'Description'}}</mat-label>
+                <textarea matInput [formControlName]="isLesson?'content':'description'" required></textarea>
+                <mat-icon matPrefix>forum</mat-icon>
+
+                
+                @if (isLesson && lessonForm.get('content')?.invalid && lessonForm.get('content')?.touched
+                ||  !isLesson && courseForm.get('description')?.invalid && courseForm.get('description')?.touched) {
+                    <mat-error>
+                        {{isLesson?'Content':'Description'}} is required
+                    </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{isLesson?'Course':'Teacher'}} ID</mat-label>
+                <input matInput [formControlName]="isLesson?'courseId':'teacherId'" required type="number" min="1">
+                <mat-icon matPrefix>assignment</mat-icon>
+                @if (isLesson && lessonForm.get('courseId')?.invalid && lessonForm.get('courseId')?.touched
+                ||  !isLesson && courseForm.get('teacherId')?.invalid && courseForm.get('teacherId')?.touched) {
+                    <mat-error>
+                        {{isLesson?'Course':'Teacher'}} ID is required
+                    </mat-error>
+                }
+            </mat-form-field>
+
+            <button mat-raised-button type="submit" [disabled]="isLesson?lessonForm.invalid:courseForm.invalid">
+                {{ isEdit ? 'Update' : 'Add' }}
+            </button>
+        </form>
+    </mat-dialog-content>
+</ng-template>
+
+@if (isOpen) {
+    <ng-container *ngTemplateOutlet="dialogTemplate"></ng-container>
+}
+

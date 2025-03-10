@@ -1,0 +1,101 @@
+
+<p>{{isVisible}}</p>
+<ng-template #dialogTemplate>
+    <mat-dialog-content>
+        <form [formGroup]="isVisible ? loginForm : registerForm" (ngSubmit)="isVisible ? login() : register()">
+            <button mat-icon-button (click)="closeDialog()" style="float: right;">
+                <mat-icon>close</mat-icon>
+              </button>
+            <h2 mat-dialog-title>
+                <mat-icon matPrefix>{{isVisible?'login':'person_add'}}</mat-icon>
+
+                {{ isVisible ? 'sign in' : 'sign up' }}
+            </h2>
+            
+                @if (isVisible) {
+                    <mat-form-field>
+                        <mat-label>email</mat-label>
+                        <input matInput formControlName="email" required>
+                        <mat-icon matPrefix>email</mat-icon>
+                        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+                            <mat-error>
+                                Email is invalid
+                            </mat-error>
+                        }
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>password</mat-label>
+                        <input matInput formControlName="password" required>
+                        <mat-icon matPrefix>lock</mat-icon>
+                        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+                            <mat-error>
+                                Password is required
+                            </mat-error>
+                        }
+                    </mat-form-field>
+                    
+                }
+
+            @if(!isVisible) {
+                <mat-form-field>
+                    <mat-label>full name</mat-label>
+                    <input matInput formControlName="name" required>
+                    <mat-icon matPrefix>person</mat-icon>
+                    @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+                        <mat-error>
+                            Name is required
+                        </mat-error>
+                    }
+                </mat-form-field>
+                
+
+
+                <mat-form-field>
+                    <mat-label>email</mat-label>
+                    <input matInput formControlName="email" required>
+                    <mat-icon matPrefix>email</mat-icon>
+                    @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                        <mat-error>
+                            Email is invalid
+                        </mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>password</mat-label>
+                    <input matInput formControlName="password" required>
+                    <mat-icon matPrefix>lock</mat-icon>
+                    @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                        <mat-error>
+                            Password is required
+                        </mat-error>
+                    }
+                </mat-form-field>
+                <!--  -->
+
+                <div>
+                    <mat-label>your role</mat-label>
+
+                    <mat-radio-group aria-label="Select an option" formControlName="role">
+                        <mat-radio-button  value="student" >student</mat-radio-button>
+                        <mat-radio-button  value="teacher">teacher</mat-radio-button>
+                        <mat-radio-button  value="admin">admin</mat-radio-button>
+                    </mat-radio-group>
+                    @if (registerForm.get('role')?.invalid && registerForm.get('role')?.touched) {
+                        <mat-error>
+                            Role is required
+                        </mat-error>
+                    }
+                </div>
+            }
+
+            <button mat-raised-button type="submit" 
+            [disabled]="isVisible ? loginForm.invalid : registerForm.invalid">
+                {{ isVisible ? 'sign in' : 'sign up' }}
+            </button>
+            <!-- <button  mat-button [routerLink]="['/',isVisible ?'register':'login']" >switch to {{ isVisible ? 'sign up' : 'sign in' }}</button> -->
+        </form>
+    </mat-dialog-content>
+</ng-template>
+@if (isOpen) {
+    <ng-container *ngTemplateOutlet="dialogTemplate"></ng-container>
+}

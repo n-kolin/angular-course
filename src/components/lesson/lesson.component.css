@@ -1,0 +1,18 @@
+.lesson-container {
+    display: flex;
+    flex-wrap: wrap; /* מאפשר לשיעורים לעבור לשורה הבאה */
+    justify-content: space-around; /* רווח שווה בין השיעורים */
+    margin: 20px;
+}
+
+.lesson-card {
+    background-color: #f0f0f0; /* צבע רקע */
+    border-radius: 8px; /* עיגול */
+    padding: 16px;
+    height: 200px ;
+    margin: 8px; /* רווח בין השיעורים */
+    flex: 0 1 calc(33% - 16px); 
+    box-sizing: border-box; /* כולל את ה-padding וה-margin בחישוב */
+    text-align: center; /* מרכז את הטקסט */
+}
+
