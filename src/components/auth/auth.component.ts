@@ -117,7 +117,7 @@ export class AuthComponent implements OnInit {
         // this.router.navigateByUrl('/user/',data.userId)
         this.setCookie(data.token, data.userId).then(() => {
           // ניתוב לאחר שהקוקי מעודכן
-          this.router.navigateByUrl('/user/' + data.userId);
+          this.router.navigateByUrl('');
       })
         
       }
@@ -145,7 +145,7 @@ export class AuthComponent implements OnInit {
 
         this.setCookie(data.token, data.userId).then(() => {
           // ניתוב לאחר שהקוקי מעודכן
-          this.router.navigateByUrl('/user/' + data.userId);
+          this.router.navigateByUrl('');
       })
         
       }

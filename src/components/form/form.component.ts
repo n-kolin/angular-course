@@ -13,7 +13,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatDialogRef, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LessonService } from '../../services/lesson.service';
@@ -54,7 +54,8 @@ export class FormComponent implements OnInit {
         private lessonService: LessonService,
         private courseService:CourseService,
         // public dialogRef: MatDialogRef<LessonFormComponent>,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private router:Router
     ) {
         this.lessonForm = this.fb.group({
             title: ['', Validators.required],
@@ -126,6 +127,8 @@ export class FormComponent implements OnInit {
           
         }
       }
+      this.router.navigateByUrl(`/course${this.isLesson?`/${this.courseId}`:''}`);
+
     }
 
 

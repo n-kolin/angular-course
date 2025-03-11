@@ -23,7 +23,7 @@ import { HomeComponent } from "../home/home.component";
 export class MenuComponent{
 
   user!:User
-  id:number | undefined = 1
+  id!:number | undefined
   constructor(private cookieService:CookieService, private router:Router,private userService:UserService){
 
   }
