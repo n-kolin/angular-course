@@ -6,7 +6,7 @@ import { Course } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
 import { CourseDetailsComponent } from '../course-details/course-details.component';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -19,12 +19,29 @@ import { RouterLink } from '@angular/router';
   styleUrl: './course.component.css'
 })
 export class CourseComponent implements OnInit {
-  @Input() studentId: number = 0
-  @Input() all: boolean = true
+  studentId: number = 0
+  all: boolean = true
   details = 0
   courses!: Course[]
-  constructor(private courseService: CourseService) { }
+  constructor(private courseService: CourseService,
+    private activatedRoute:ActivatedRoute
+  ) { }
   ngOnInit(): void {
+
+    this.activatedRoute.paramMap.subscribe((params) => {
+      const studId = params.get('studId');
+      if(studId==='all')
+      {
+        this.all = true;
+      }
+      else{
+        this.studentId = Number(studId);
+        console.log(this.studentId);
+        
+      }
+    });
+
+
     if (!this.all) {
       this.courseService.getCoursesByStudentId(this.studentId).subscribe((data) => {
         this.courses = data

@@ -5,11 +5,18 @@
     </div>
     <div class="left">
       <button mat-button [routerLink]="['']">home</button>
+      <button mat-button (click)="myCourses()">my courses</button>
+      <button mat-button (click)="allCourses()">enroll</button>
+      <button mat-button (click)="allCourses()">add course</button>
       @if(id){
-          <button mat-button (click)="navigate()">my dashboard</button>
+
+        <button mat-flat-button color="primary" [routerLink]="['/connect/login']">sign in</button>
+        <button mat-raised-button [routerLink]="['/connect/register']">sign up</button>
       }
-      <button mat-flat-button color="primary" [routerLink]="['/connect/login']">sign in</button>
-      <button mat-raised-button (click)="f()" [routerLink]="['/connect/register']">sign up</button>
+      @else {
+        <button mat-raised-button (click)="logOut()">log out</button>
+
+      }
   
     </div>
   </mat-toolbar> 

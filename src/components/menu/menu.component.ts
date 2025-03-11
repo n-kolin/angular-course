@@ -20,31 +20,65 @@ import { HomeComponent } from "../home/home.component";
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent implements OnDestroy{
+export class MenuComponent{
 
   user!:User
-  id!:number
+  id:number | undefined = 1
   constructor(private cookieService:CookieService, private router:Router,private userService:UserService){
 
   }
 
 
-  ngOnDestroy(): void {
-    this.getCookie().then((id) => {
-      this.userService.getUserById(Number(id)).subscribe((data) => {
-        this.user = data
-      })
-      this.id = Number(id);
-  })
+  myCourses(){
+    console.log('my');
+    
+    this.getId().then(()=>{
+
+      console.log('???');
+      
+      if(this.id){
+        this.router.navigateByUrl('/course/stud/' + this.id);
+      console.log('/course/stud/' + this.id);
+      }
+      else
+        console.log('user is not connect');
+      
+        console.log(this.id);
+        
+    }).catch((e)=>{
+console.log(e);
+
+    })
+    
+
   }
-  navigate(){
-    this.getCookie().then((id) => {
-      // ניתוב לאחר שהקוקי מעודכן
-      this.userService.getUserById(Number(id)).subscribe((data) => {
-        this.user = data
+  allCourses(){
+    this.getId().then(()=>{
+
+      if(this.id)
+        this.router.navigateByUrl('/course/stud/all');
+      else
+        console.log('user is not connect');
+      
+    })
+
+  }
+  
+  getId():Promise<any>{
+    return new Promise((resolve, reject) => {
+      try {
+        this.getCookie().then((id) => {
+          this.id = Number(id);
+          console.log('gid',this.id);
+          
+          this.userService.getUserById(Number(id)).subscribe((data) => {
+            this.user = data
+          })
       })
-      this.id = Number(id);
-  })
+      } catch (error) {
+          reject(error);
+      }
+  });    
     
   }
 
@@ -52,15 +86,20 @@ export class MenuComponent implements OnDestroy{
     return new Promise((resolve, reject) => {
       try {
           const id = this.cookieService.get("id")
+          console.log('c',id);
+          
           resolve(id);
       } catch (error) {
           reject(error);
       }
   });
   }
-
-  f(){
-    console.log('hjk');
-    
+  logOut(){
+  
+    this.cookieService.delete("accessToken");
+    this.cookieService.delete("id");
+    this.id = undefined;
+   
   }
-}
+
+ }
