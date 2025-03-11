@@ -46,7 +46,7 @@ export class LessonService {
         "courseId": lesson.courseId
       }).subscribe(() => {
         this.getLessonsInCourse(lesson.courseId);
-        this.getLessonsInCourse(courseId);//האם לעדכן ל 2 הקורסים?...
+        this.getLessonsInCourse(courseId);
       })
   }
 

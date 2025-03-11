@@ -1,5 +1,4 @@
 
-<!-- <ng-template #dialogTemplate> -->
     <mat-dialog-content>
         <form [formGroup]="loginForm" (ngSubmit)="login()">
             <button mat-icon-button (click)="closeDialog()" style="float: right;">
@@ -37,10 +36,5 @@
             [disabled]="loginForm.invalid">
                 sign in
             </button>
-            <!-- <button  mat-button [routerLink]="['/',isVisible ?'register':'login']" >switch to {{ isVisible ? 'sign up' : 'sign in' }}</button> -->
         </form>
     </mat-dialog-content>
-<!-- </ng-template>
-@if (isOpen) {
-    <ng-container *ngTemplateOutlet="dialogTemplate"></ng-container>
-} -->

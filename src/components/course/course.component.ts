@@ -13,32 +13,32 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   selector: 'app-course',
   standalone: true,
   imports: [MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCard,
-    NgClass, MatIcon, CourseDetailsComponent,MatButtonModule, RouterLink
+    MatIcon, MatButtonModule, RouterLink
   ],
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })
 export class CourseComponent implements OnInit {
   studentId: number = 0
+
   all: boolean = true
   details = 0
   courses!: Course[]
   constructor(private courseService: CourseService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) { }
   ngOnInit(): void {
 
     this.activatedRoute.paramMap.subscribe((params) => {
       const studId = params.get('studId');
-      if(studId==='all')
-      {
+      if (studId === 'all') {
         this.all = true;
       }
-      else{
+      else {
         this.all = false;
         this.studentId = Number(studId);
         console.log(this.studentId);
-        
+
       }
     });
 
@@ -62,19 +62,19 @@ export class CourseComponent implements OnInit {
 
     this.courseService.enroll(id, this.studentId).subscribe(data => {
       console.log(data)
-    
-    console.log('enroll', id, this.studentId);
-    this.courseService.getCoursesByStudentId(this.studentId).subscribe((data) => {
-      this.courses = data
-    });
-  })
+
+      console.log('enroll', id, this.studentId);
+      this.courseService.getCoursesByStudentId(this.studentId).subscribe((data) => {
+        this.courses = data
+      });
+    })
   }
 
   leave(id: number) {
     console.log('unenroll', id, this.studentId);
 
-    this.courseService.unenroll(id, this.studentId).subscribe(data => 
-      {console.log(data)
+    this.courseService.unenroll(id, this.studentId).subscribe(data => {
+      console.log(data)
       this.courseService.getCoursesByStudentId(this.studentId).subscribe((data) => {
         this.courses = data
       });

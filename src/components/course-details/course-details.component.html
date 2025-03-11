@@ -1,59 +1,33 @@
-<!-- <h1>{{ course.title }}</h1>
-
-<div>
-  <button mat-flat-button color="primary" >
-    <mat-icon>edit</mat-icon>
-    edit
-  </button>
-  <button mat-flat-button color="primary" >
-    <mat-icon>person_add</mat-icon>
-    enroll
-  </button>
-  <button mat-flat-button color="primary" >
-    <mat-icon>delete</mat-icon>
-    delete
-  </button>
-  
-</div>
-
-<div class="course-info">
-  <p> description: {{ course.description }}</p>
-  @if(teacher){
-  <p> teacher: {{ teacher.name }}</p>
-  }
-</div>
-@if(course){
-<app-lesson [courseId]="course.id"></app-lesson>
-} -->
-
-
 <h1 class="course-title">{{ course.title }}</h1>
 
 <div class="button-container">
 
-  <button [tooltip]="'enroll to this course'"  mat-fab (click)="enroll()" class="round-button">
+  <button [tooltip]="'enroll to this course'" mat-fab (click)="enroll()" class="round-button">
     <mat-icon>person_add</mat-icon>
   </button>
-  <button [tooltip]="'unenroll from this course'" mat-fab (click)="unenroll()" class="round-button" >
+  <button [tooltip]="'unenroll from this course'" mat-fab (click)="unenroll()" class="round-button">
     <mat-icon>person_remove</mat-icon>
   </button>
 </div>
 
 <div class="course-info">
-    <div class="course-details">
-  <p>description: {{ course.description }}</p>
-  @if(teacher){
-  <p>teacher: {{ teacher.name }}</p>
-  }
-</div>
+  <div class="course-details">
+    <p>description: {{ course.description }}</p>
+    @if(teacher){
+    <p>teacher: {{ teacher.name }}</p>
+    }
+  </div>
   <div class="course-actions">
-    <button [tooltip]="'edit the course'" [routerLink]="['/edit/crs',courseId]" mat-fab class="round-button edit-course" color="primary">
+    <button [tooltip]="'edit the course'" [routerLink]="['/edit/crs',courseId]" mat-fab class="round-button edit-course"
+      color="primary">
       <mat-icon>edit</mat-icon>
     </button>
-    <button [tooltip]="'delete the course'" mat-fab (click)="deleteCourse()" [routerLink]="['/course']" class="round-button edit-course" color="primary">
+    <button [tooltip]="'delete the course'" mat-fab (click)="deleteCourse()" [routerLink]="['/course']"
+      class="round-button edit-course" color="primary">
       <mat-icon>delete</mat-icon>
     </button>
-    <button [tooltip]="'add lesson to the course'" [routerLink]="['/add/crs',courseId,'lsn']" mat-fab class="round-button edit-course" color="primary">
+    <button [tooltip]="'add lesson to the course'" [routerLink]="['/add/crs',courseId,'lsn']" mat-fab
+      class="round-button edit-course" color="primary">
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -61,5 +35,5 @@
 
 
 @if(course){
-    <app-lesson [courseId]="course.id"></app-lesson>
-    } 
+<app-lesson [courseId]="course.id"></app-lesson>
+}

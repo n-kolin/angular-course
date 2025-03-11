@@ -18,7 +18,9 @@ export class TooltipDirective {
   @HostListener('mouseleave') onMouseLeave() {
     this.destroyTooltip();
   }
-
+  @HostListener('click') onClick() {
+    this.destroyTooltip(); // מסיר את ה-tooltip כאשר לוחצים על הכפתור
+  }
   private createTooltip() {
    
     console.log(this.tooltip);
@@ -27,20 +29,19 @@ export class TooltipDirective {
     this.tooltipElement.textContent = this.tooltip;
     this.tooltipElement.style.position = 'absolute';
     this.tooltipElement.style.backgroundColor = 'beige'
-    this.tooltipElement.style.color = 'black';
+    this.tooltipElement.style.color = 'white';
     this.tooltipElement.style.padding = '5px';
     this.tooltipElement.style.borderRadius = '5px';
     this.tooltipElement.style.zIndex = '1000';
-    // this.tooltipElement.style.width = 'auto';
-    // this.tooltipElement.style.height = 'auto';
-    // this.tooltipElement.style.pointerEvents = 'none';
-
-    
+      
     const rect = this.el.nativeElement.getBoundingClientRect();
     this.tooltipElement.style.left = `${rect.left}px`;
     this.tooltipElement.style.top = `${rect.top + rect.height}px`;
 
     document.body.appendChild(this.tooltipElement);
+    // setTimeout(() => {
+    //   this.destroyTooltip();
+    // }, 100);
   }
 
   private destroyTooltip() {

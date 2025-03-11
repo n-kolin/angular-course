@@ -1,7 +1,6 @@
 <div class="course-list">
     @for(course of courses;track course.id){
-    <!-- <div class="course-card" (mouseover)="hover = true" (mouseleave)="hover = false">
-      <mat-card [ngClass]="{'hovered': hover}"> -->
+
     <div class="course-card">
         <mat-card>
             <mat-card-header>
@@ -9,12 +8,7 @@
                 <mat-card-subtitle>{{ course.description }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-actions>
-                <!-- <button mat-button color="primary" (click)="enroll(course.id)">
-                    <mat-icon>person_add</mat-icon> 
-                </button>
-                <button mat-button color="warn"  (click)="leave(course.id)">
-                    <mat-icon>person_remove</mat-icon> 
-                </button> -->
+
                 <a mat-button [routerLink]="['/course',course.id]" (click)="this.details=course.id">
                     <mat-icon>info</mat-icon>
                     more info
@@ -26,17 +20,14 @@
     @empty {
     <mat-card id="enroll-card">
 
-        @if(!all){
+        @if(!all && studentId){
 
-            You don't have any courses in your account yet.
-            Too bad you'll miss out!
-            <button mat-raised-button class="enroll" [routerLink]="['/course/stud/all']">     
-                enroll now
-            </button>
+        You don't have any courses in your account yet.
+        Too bad you'll miss out!
+        <button mat-raised-button class="enroll" [routerLink]="['/course/stud/all']">
+            enroll now
+        </button>
 
         }
     </mat-card> }
 </div>
-<!-- @if(this.details!==0){
-<app-course-details [courseId]="details"></app-course-details>
-} -->

@@ -6,14 +6,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-
-
-import { Observable } from 'rxjs';
-import { User } from '../../models/user.model';
-import { NgTemplateOutlet } from '@angular/common';
-import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Role } from '../../models/role.enum';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -27,11 +22,7 @@ import { CookieService } from 'ngx-cookie-service';
     MatInputModule,
     MatRadioModule,
     MatDialogModule,
-    NgTemplateOutlet,
-    MatIconModule,
-
-    RouterLink,
-    
+    MatIconModule, 
 
   ],
   templateUrl: './sign-up.component.html',
@@ -40,19 +31,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class SignUpComponent implements OnInit {
   registerForm!: FormGroup;
 
-  res!: any
-  // userId = 0
-  // user :User = {
-  //   'id':0,
-  //   'name':'',
-  //   'email':'',
-  //   'password':'',
-  //   'role':Role.Student,
-  // }
-
-
-
-
+  
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private userService: UserService, 
     private cookieService:CookieService,private router:Router,private activatedRoute:ActivatedRoute,
@@ -78,16 +57,7 @@ export class SignUpComponent implements OnInit {
     if (this.registerForm.valid) {
       this.userService.register(this.registerForm.value).subscribe(data => {
         console.log(data)
-        this.res = data
-
-        // this.cookieService.set("accessToken",data.token)
-        // this.cookieService.set("id",data.userId)
-        // this.router.navigateByUrl('/user/',data.userId)
-        // this.setCookie(data.token, data.userId).then(() => {
-        //   // ניתוב לאחר שהקוקי מעודכן
-        //   this.router.navigateByUrl('');
-        //   console.log("success", data);
-        // })
+       
         this.cookieService.set("accessToken", data.token);
         this.cookieService.set("id", data.userId);
         this.dialogRef.close(true);
@@ -100,10 +70,7 @@ export class SignUpComponent implements OnInit {
       }
 
       );
-      
-
-
-    }
+     }
   }
 
   closeDialog(){

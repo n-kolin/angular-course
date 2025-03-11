@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user.model';
@@ -39,11 +39,7 @@ export class UserService {
       password: user.password,
       role: user.role,
     });
-    // .subscribe(() => {
-    //   this.getUsers();
-      
-    // }
-  // )
+    
   }
   login(user: { email: string, password: string }) :Observable<any>{
 

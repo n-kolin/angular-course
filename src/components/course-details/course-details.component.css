@@ -1,56 +1,51 @@
 .course-title {
-    text-align: center; /* מרכז את הכותרת */
-    font-size: 2em; /* גודל טקסט גדול */
-    margin-bottom: 20px; /* רווח מתחת לכותרת */
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
 .button-container {
-    display: flex; /* שימוש ב-flexbox */
-    justify-content: center; /* מרכז את הכפתורים */
-    margin-bottom: 20px; /* רווח מתחת לכפתורים */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .round-button {
-    border-radius: 50%; /* הופך את הכפתורים לעיגולים */
-    width: 56px; /* רוחב קבוע */
-    height: 56px; /* גובה קבוע */
-    display: flex; /* שימוש ב-flexbox */
-    align-items: center; /* מרכז את האיקון אנכית */
-    justify-content: center; /* מרכז את האיקון אופקית */
-    transition: background-color 0.3s; /* אנימציה על שינוי צבע */
-    margin: 10px;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  margin: 10px;
 
-    cursor: pointer;
-}
-
-.round-button:hover {
-    /* background-color: rgba(63, 81, 181, 0.2);  */
+  cursor: pointer;
 }
 
 .course-info {
-    background-color: #f5f5f5; /* צבע רקע לכרטיס */
-    padding: 20px; /* ריווח פנימי */
-    border-radius: 8px; /* פינות מעוגלות */
-    text-align: center; /* מרכז את הטקסט */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* צל לכרטיס */
-    max-width: 50%; /* רוחב מקסימלי של 50% מהמסך */
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between; /* מפזר את התוכן בין הצדדים */
-    align-items: center; /* מרכז את התוכן אנכית */
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-  
-  .course-details {
-    flex: 1; /* תופס את כל השטח הפנוי */
-  }
-  
-  .course-actions {
-    /* display: flex; */
-    gap: 8px; /* רווח בין הכפתורים */
-  }
-  
- .edit-course{
-    background-color: rgba(255, 128, 128, 0.1);
- }
-  
+
+.course-details {
+  flex: 1;
+}
+
+.course-actions {
+
+  gap: 8px;
+}
+
+.edit-course {
+  background-color: rgba(255, 128, 128, 0.1);
+}

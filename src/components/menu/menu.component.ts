@@ -6,11 +6,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { HomeComponent } from "../home/home.component";
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { AuthComponent } from '../auth/auth.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { SignInComponent } from '../sign-in/sign-in.component';
-import { DatePipe } from '@angular/common';
 import { RoleIconPipe } from '../../pipes/role-icon.pipe';
 
 @Component({
@@ -20,144 +18,143 @@ import { RoleIconPipe } from '../../pipes/role-icon.pipe';
     RouterLink,
     MatToolbarModule,
     MatButtonModule,
-    HomeComponent,
     RouterOutlet,
     MatDialogModule,
     RoleIconPipe,
-    
-    
-],
+
+
+  ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent implements OnInit{
+export class MenuComponent implements OnInit {
 
-  user!:User | undefined
-  id!:number | undefined
-  
+  user!: User | undefined
+  id!: number | undefined
 
-  constructor(private cookieService:CookieService, private router:Router,private userService:UserService,
-    private dialog:MatDialog
-  ){
+
+  constructor(private cookieService: CookieService, private router: Router, private userService: UserService,
+    private dialog: MatDialog
+  ) {
 
   }
 
-  
+
   ngOnInit(): void {
-    this.getId().then(()=>{
+    this.getId().then(() => {
       console.log(this.id, this.user);
-      
+
     })
   }
 
-  myCourses(){
+  myCourses() {
     console.log('my');
-    
-    this.getId().then(()=>{
+
+    this.getId().then(() => {
 
       console.log('???');
-      
-      if(this.id){
+
+      if (this.id) {
         this.router.navigateByUrl('/course/stud/' + this.id);
-      console.log('/course/stud/' + this.id);
+        console.log('/course/stud/' + this.id);
       }
       else
         console.log('user is not connect');
-      
-        console.log(this.id);
-        
-    }).catch((e)=>{
-console.log(e);
+
+      console.log(this.id);
+
+    }).catch((e) => {
+      console.log(e);
 
     })
-    
+
 
   }
-  allCourses(){
-    this.getId().then(()=>{
+  allCourses() {
+    this.getId().then(() => {
 
-      if(this.id)
+      if (this.id)
         this.router.navigateByUrl('/course/stud/all');
       else
         console.log('user is not connect');
-      
+
     })
 
   }
-  
-  getId():Promise<any>{
+
+  getId(): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
         this.getCookie().then((id) => {
           this.id = Number(id);
-          console.log('gid',this.id);
-          
+          console.log('gid', this.id);
+
           this.userService.getUserById(Number(id)).subscribe((data) => {
             this.user = data
           })
-      })
+        })
       } catch (error) {
-          reject(error);
+        reject(error);
       }
-  });    
-    
+    });
+
   }
 
-  getCookie() :Promise<string>{
+  getCookie(): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
-          const id = this.cookieService.get("id")
-          console.log('c',id);
-          
-          resolve(id);
+        const id = this.cookieService.get("id")
+        console.log('c', id);
+
+        resolve(id);
       } catch (error) {
-          reject(error);
+        reject(error);
       }
-  });
+    });
   }
-  logOut(){
-  
+  logOut() {
+
     this.cookieService.delete("accessToken");
     this.cookieService.delete("id");
     this.id = undefined;
     this.user = undefined;
-   
+    this.router.navigateByUrl('');
+
+
   }
 
 
-  openSignUp(){
-    const dialogRef = this.dialog.open(SignUpComponent,{
-      width:'500px',
-      height:'auto',
-      panelClass: 'centered-dialog', 
+  openSignUp() {
+    const dialogRef = this.dialog.open(SignUpComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: 'centered-dialog',
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // this.router.navigate([''])
-        this.getId().then(()=>{
+        this.getId().then(() => {
           console.log(this.id, this.user);
-          
+
         })
       }
 
     });
   }
-  openSignIn(){
-    const dialogRef = this.dialog.open(SignInComponent,{
-      width:'500px',
-      height:'auto',
-      panelClass: 'centered-dialog', 
+  openSignIn() {
+    const dialogRef = this.dialog.open(SignInComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: 'centered-dialog',
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // this.router.navigate(['course'])
-        this.getId().then(()=>{
+        this.getId().then(() => {
           console.log(this.id, this.user);
-          
+
         })
       }
 
     });
   }
 
- }
+}

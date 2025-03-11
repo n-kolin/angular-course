@@ -12,10 +12,10 @@ import { MenuComponent } from "../components/menu/menu.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CourseComponent, CourseDetailsComponent, LessonComponent,
+  imports: [RouterOutlet, 
     MatButtonModule,
     MatToolbarModule,
-    RouterLink, HomeComponent, MenuComponent],
+     MenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

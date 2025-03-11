@@ -17,7 +17,7 @@
 }
 
 .recommendation-card {
-    width: calc(33% - 20px); /* Adjusting for gap */
+    width: calc(33% - 20px); 
 }
 
 .testimonial-form {
