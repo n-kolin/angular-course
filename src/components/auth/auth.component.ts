@@ -6,7 +6,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -41,7 +41,6 @@ export class AuthComponent implements OnInit {
   registerForm!: FormGroup;
   loginForm!: FormGroup;
   isVisible: boolean = false;
-  isOpen: boolean = true;
 
   res!: any
   // userId = 0
@@ -59,6 +58,7 @@ export class AuthComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private userService: UserService, 
     private cookieService:CookieService,private router:Router,private activatedRoute:ActivatedRoute,
+    private dialogRef:MatDialogRef<AuthComponent>
   ) { }
 
   ngOnInit() {
@@ -69,7 +69,7 @@ export class AuthComponent implements OnInit {
         this.isVisible = true;
       if(status==='register')
         this.isVisible = false;
-      this.isOpen = true;
+      // this.isOpen = true;
       console.log(this.isVisible);
       
     });
@@ -106,7 +106,6 @@ export class AuthComponent implements OnInit {
   }
 
   register() {
-    this.isOpen = false
     if (this.registerForm.valid) {
       this.userService.register(this.registerForm.value).subscribe(data => {
         console.log(data)
@@ -118,21 +117,25 @@ export class AuthComponent implements OnInit {
         this.setCookie(data.token, data.userId).then(() => {
           // ניתוב לאחר שהקוקי מעודכן
           this.router.navigateByUrl('');
+          console.log("success", data);
+          this.dialogRef.close(true);
       })
         
+
+      },(e)=>{
+        this.dialogRef.close(false);
+        alert("Error: logintion failed");
+        console.log(e);
       }
 
       );
-      console.log(this.registerForm)
-      console.log(this.res);
-
+      
 
 
     }
   }
 
   login() {
-    this.isOpen = false
     if (this.loginForm.valid) {
       this.userService.login(this.loginForm.value).subscribe(data => {
         console.log(data)
@@ -145,7 +148,7 @@ export class AuthComponent implements OnInit {
 
         this.setCookie(data.token, data.userId).then(() => {
           // ניתוב לאחר שהקוקי מעודכן
-          this.router.navigateByUrl('');
+          // this.router.navigateByUrl('');
       })
         
       }
@@ -163,11 +166,11 @@ export class AuthComponent implements OnInit {
   // }
   openDialog(val: boolean) {
     // this.dialog.open(this.dialogTemplate);
-    this.isOpen = true
+    // this.isOpen = true
     this.isVisible = val;
   }
   closeDialog(){
-    this.isOpen = false;
+    // this.isOpen = false;
   }
   
 

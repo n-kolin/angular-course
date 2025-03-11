@@ -1,29 +1,44 @@
-
 <mat-toolbar class="container" color="primary">
-    <div class="right">
-      <span>Wolcome to Courses Online!</span>
-    </div>
-    <div class="left">
-      <button mat-button (click)="getId()">cookie</button>
-      <button mat-button [routerLink]="['']">home</button>
-      <button mat-button [routerLink]="['/course/stud/' , id]" >my courses</button>
-      <button mat-button [routerLink]="['/course/stud/all' ]">enroll</button>
-      <button mat-button [routerLink]="['/add/crs' ]">add course</button>
-      <button mat-button [routerLink]="['/course/stud/all']">all courses</button>
-      @if(!id){
+  <div class="right">
+    
+      <span>{{user?.role || '' | RoleIcon }}</span>
+ 
+    <span>Wolcome to Courses Online!</span>
+  </div>
+  <div class="left">
+    <button mat-button [routerLink]="['']">home</button>
+    @if(!id){
 
-        <button mat-flat-button color="primary" [routerLink]="['/connect/login']">sign in</button>
-        <button mat-raised-button [routerLink]="['/connect/register']">sign up</button>
-      }
-      @else {
-        <button mat-raised-button (click)="logOut()">log out</button>
+    <button mat-flat-button color="primary" (click)="openSignIn()">sign in</button>
+    <button mat-raised-button (click)="openSignUp()">sign up</button>
+    }
+    @else{
 
-      }
-  
-    </div>
-  </mat-toolbar> 
+    @switch (user?.role) {
+    @case ('student') {
+    <button mat-button [routerLink]="['/course/stud/' , id]">my courses</button>
+    <button mat-button [routerLink]="['/course/stud/all' ]">enroll</button>
+    }
+    @case ('teacher') {
+    <button mat-button [routerLink]="['/add/crs' ]">add course</button>
+
+    }
+    @default {
+    <button mat-button [routerLink]="['/course/stud/all']">all courses</button>
+
+  }
+}
+<button mat-raised-button (click)="logOut()">log out</button>
+    }
 
 
-  <div >
-    <router-outlet></router-outlet>
+
+
+
+  </div>
+</mat-toolbar>
+
+
+<div>
+  <router-outlet></router-outlet>
 </div>

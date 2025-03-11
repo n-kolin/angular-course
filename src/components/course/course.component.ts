@@ -35,6 +35,7 @@ export class CourseComponent implements OnInit {
         this.all = true;
       }
       else{
+        this.all = false;
         this.studentId = Number(studId);
         console.log(this.studentId);
         

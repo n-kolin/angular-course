@@ -16,7 +16,7 @@
                     <mat-icon>person_remove</mat-icon> 
                 </button> -->
                 <a mat-button [routerLink]="['/course',course.id]" (click)="this.details=course.id">
-                    <mat-icon >info</mat-icon> 
+                    <mat-icon>info</mat-icon>
                     more info
                 </a>
             </mat-card-actions>
@@ -24,8 +24,18 @@
     </div>
     }
     @empty {
-    jk {{studentId}}
-    }
+    <mat-card id="enroll-card">
+
+        @if(!all){
+
+            You don't have any courses in your account yet.
+            Too bad you'll miss out!
+            <button mat-raised-button class="enroll" [routerLink]="['/course/stud/all']">     
+                enroll now
+            </button>
+
+        }
+    </mat-card> }
 </div>
 <!-- @if(this.details!==0){
 <app-course-details [courseId]="details"></app-course-details>

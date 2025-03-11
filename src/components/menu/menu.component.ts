@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,6 +6,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { HomeComponent } from "../home/home.component";
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { AuthComponent } from '../auth/auth.component';
+import { SignUpComponent } from '../sign-up/sign-up.component';
+import { SignInComponent } from '../sign-in/sign-in.component';
+import { DatePipe } from '@angular/common';
+import { RoleIconPipe } from '../../pipes/role-icon.pipe';
 
 @Component({
   selector: 'app-menu',
@@ -16,18 +22,33 @@ import { HomeComponent } from "../home/home.component";
     MatButtonModule,
     HomeComponent,
     RouterOutlet,
+    MatDialogModule,
+    RoleIconPipe,
+    
+    
 ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent{
+export class MenuComponent implements OnInit{
 
-  user!:User
+  user!:User | undefined
   id!:number | undefined
-  constructor(private cookieService:CookieService, private router:Router,private userService:UserService){
+  
+
+  constructor(private cookieService:CookieService, private router:Router,private userService:UserService,
+    private dialog:MatDialog
+  ){
 
   }
 
+  
+  ngOnInit(): void {
+    this.getId().then(()=>{
+      console.log(this.id, this.user);
+      
+    })
+  }
 
   myCourses(){
     console.log('my');
@@ -99,7 +120,44 @@ console.log(e);
     this.cookieService.delete("accessToken");
     this.cookieService.delete("id");
     this.id = undefined;
+    this.user = undefined;
    
+  }
+
+
+  openSignUp(){
+    const dialogRef = this.dialog.open(SignUpComponent,{
+      width:'500px',
+      height:'auto',
+      panelClass: 'centered-dialog', 
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // this.router.navigate([''])
+        this.getId().then(()=>{
+          console.log(this.id, this.user);
+          
+        })
+      }
+
+    });
+  }
+  openSignIn(){
+    const dialogRef = this.dialog.open(SignInComponent,{
+      width:'500px',
+      height:'auto',
+      panelClass: 'centered-dialog', 
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // this.router.navigate(['course'])
+        this.getId().then(()=>{
+          console.log(this.id, this.user);
+          
+        })
+      }
+
+    });
   }
 
  }

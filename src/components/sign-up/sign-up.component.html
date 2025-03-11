@@ -1,41 +1,17 @@
 
 <!-- <ng-template #dialogTemplate> -->
     <mat-dialog-content>
-        <form [formGroup]="isVisible ? loginForm : registerForm" (ngSubmit)="isVisible ? login() : register()">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
             <button mat-icon-button (click)="closeDialog()" style="float: right;">
                 <mat-icon>close</mat-icon>
               </button>
             <h2 mat-dialog-title>
-                <mat-icon matPrefix>{{isVisible?'login':'person_add'}}</mat-icon>
+                <mat-icon matPrefix>person_add</mat-icon>
 
-                {{ isVisible ? 'sign in' : 'sign up' }}
+               sign up
             </h2>
             
-                @if (isVisible) {
-                    <mat-form-field>
-                        <mat-label>email</mat-label>
-                        <input matInput formControlName="email" required>
-                        <mat-icon matPrefix>email</mat-icon>
-                        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
-                            <mat-error>
-                                Email is invalid
-                            </mat-error>
-                        }
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>password</mat-label>
-                        <input matInput formControlName="password" required>
-                        <mat-icon matPrefix>lock</mat-icon>
-                        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
-                            <mat-error>
-                                Password is required
-                            </mat-error>
-                        }
-                    </mat-form-field>
-                    
-                }
-
-            @if(!isVisible) {
+                
                 <mat-form-field>
                     <mat-label>full name</mat-label>
                     <input matInput formControlName="name" required>
@@ -85,11 +61,11 @@
                         </mat-error>
                     }
                 </div>
-            }
+            
 
             <button mat-raised-button type="submit" 
-            [disabled]="isVisible ? loginForm.invalid : registerForm.invalid">
-                {{ isVisible ? 'sign in' : 'sign up' }}
+            [disabled]="registerForm.invalid">
+               sign up
             </button>
             <!-- <button  mat-button [routerLink]="['/',isVisible ?'register':'login']" >switch to {{ isVisible ? 'sign up' : 'sign in' }}</button> -->
         </form>

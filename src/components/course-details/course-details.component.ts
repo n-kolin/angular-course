@@ -8,12 +8,13 @@ import { LessonComponent } from "../lesson/lesson.component";
 import { MatButtonModule } from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { TooltipDirective } from '../../directives/tooltip.directive';
 
 
 @Component({
   selector: 'app-course-details',
   standalone: true,
-  imports: [MatIcon, LessonComponent, MatButtonModule,RouterLink],
+  imports: [MatIcon, LessonComponent, MatButtonModule,RouterLink, TooltipDirective],
   templateUrl: './course-details.component.html',
   styleUrl: './course-details.component.css'
 })

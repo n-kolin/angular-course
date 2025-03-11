@@ -15,6 +15,14 @@ mat-card {
     padding: 20px; 
     text-align: center; 
 }
+.enroll{
+    width: 25%;
+    margin-top: 20px;
+}
+#enroll-card{
+    margin: 150px;
+    padding: 50px;
+}
 
 
 
